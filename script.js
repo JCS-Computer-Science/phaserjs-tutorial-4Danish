@@ -6,3 +6,4 @@ const book2 = {
         return `${this.title} was writted by ${this.author} in ${this.year}`;
     }
 };
+console.log(Object.values(book2));
