@@ -3,4 +3,3 @@ function Book() {
 }
 
 const book1 = new Book();
-console.clear;
