@@ -1,9 +1,6 @@
-const book2 = {
-    title: 'Book Two',
-    author: 'Nicholas Cage',
-    year: '2004',
-    getSummary: function() {
-        return `${this.title} was writted by ${this.author} in ${this.year}`;
-    }
-};
-console.log(Object.values(book2));
+function Book() {
+    console.log('Book Initialized..');
+}
+
+const book1 = new Book();
+console.clear;
