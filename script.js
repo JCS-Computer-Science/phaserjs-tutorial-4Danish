@@ -7,17 +7,20 @@ function Book(title, author, year) {
 //getSummary prototype
 Book.prototype.getSummary = function(){
     return `${this.title} was written by ${this.author} in ${this.year}`;
+};
+//magazine constructor
+function Magazine(title, author, year,month){
+    Book.call(this, title, author, year);
+
+    this.month = month;
 }
-
-Book.prototype.getAge = function(){
-    const years = new Date().getFullYear() - this.year;
-    return `${this.title} is ${years} years old.`;
-}
-
-const book1 = new Book('Book One', 'Jane Doe', '2005');
-const book2 = new Book('Book Two', 'John Doe', '2004');
-
-console.log(book1.getSummary());
-console.log(book1);
-console.log(book1.getAge());
-console.log(book2.getAge());
+//Inheriting Prototype
+Magazine.prototype = Object.create(Book.prototype);
+//Instantiate Magazine Object
+const mag1 = new Magazine('Mag One', 'John Doe', '2018', 'Aug');
+//Magazine Constructor
+Magazine.prototype.constructor = Magazine;
+//console logging
+console.log(mag1.getSummary());
+console.log(mag1);
+//at 26:03 of CrashCourse Video OOP
