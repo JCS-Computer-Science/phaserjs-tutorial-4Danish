@@ -179,3 +179,4 @@ export default class Game extends Phaser.Scene {
         return bottomPlatform
     }
 }
+//Part 9 at 8:45 of Video Series Phaser
