@@ -23,6 +23,9 @@ export default class Game extends Phaser.Scene {
     constructor(){
         super('game')
     }
+    init(){
+        this.carrotsCollected = 0
+    }
 
     preload(){
         this.load.image('background', 'assets/bg_layer1.png')
@@ -30,6 +33,7 @@ export default class Game extends Phaser.Scene {
         this.load.image('bunny-stand', 'assets/bunny1_stand.png')
         this.load.image('carrot', 'assets/carrot.png')
         this.cursors = this.input.keyboard.createCursorKeys()
+        this.load.image('bunny-jump', 'assets/bunny1_jump.png')
     }
 
     create(){
@@ -89,6 +93,12 @@ export default class Game extends Phaser.Scene {
 
         if(touchingDown){
             this.player.setVelocityY(-300)
+
+            this.player.setTexture('bunny-jump')
+        }
+        const vy = this.player.body.velocity.y
+        if (vy > 0 && this.player.texture.key !== 'bunny-stand'){
+            this.player.setTexture('bunny-stand')
         }
         
         this.platforms.children.iterate(child => {
@@ -115,7 +125,7 @@ export default class Game extends Phaser.Scene {
         const bottomPlatform = this.findBottomMostPlatform
         ()
         if(this.player.y > bottomPlatform.y + 200){
-            console.log('game over')
+            this.scene.start('game-over')
         }
     }
 
@@ -166,7 +176,7 @@ export default class Game extends Phaser.Scene {
 
     findBottomMostPlatform(){
         const platforms = this.platforms.getChildren()
-        let bottonPlatform = platforms[0]
+        let bottomPlatform = platforms[0]
 
         for (let i = 1; i < platforms.length; ++i){
             const platform = platforms[i]
@@ -179,4 +189,3 @@ export default class Game extends Phaser.Scene {
         return bottomPlatform
     }
 }
-//Part 9 at 8:45 of Video Series Phaser
