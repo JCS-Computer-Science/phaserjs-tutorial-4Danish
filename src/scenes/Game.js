@@ -34,6 +34,9 @@ export default class Game extends Phaser.Scene {
         this.load.image('carrot', 'assets/carrot.png')
         this.cursors = this.input.keyboard.createCursorKeys()
         this.load.image('bunny-jump', 'assets/bunny1_jump.png')
+        this.load.audio('jump', 'assets/sfx/PlopSound.mp3')
+        this.load.audio('ending', 'assets/sfx/GameOverSound.mp3')
+        this.load.audio('collecting', 'assets/sfx/CoinCollect.mp3')
     }
 
     create(){
@@ -95,6 +98,8 @@ export default class Game extends Phaser.Scene {
             this.player.setVelocityY(-300)
 
             this.player.setTexture('bunny-jump')
+
+            this.sound.play('jump')
         }
         const vy = this.player.body.velocity.y
         if (vy > 0 && this.player.texture.key !== 'bunny-stand'){
@@ -126,6 +131,7 @@ export default class Game extends Phaser.Scene {
         ()
         if(this.player.y > bottomPlatform.y + 200){
             this.scene.start('game-over')
+            this.sound.play('ending')
         }
     }
 
@@ -172,6 +178,7 @@ export default class Game extends Phaser.Scene {
 
         const value = `Carrots: ${this.carrotsCollected}`
         this.carrotsCollectedText.text = value
+        this.sound.play('collecting')
     }
 
     findBottomMostPlatform(){
